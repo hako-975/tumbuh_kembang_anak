@@ -1,0 +1,13 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="title" content="Sistem Informasi Tumbuh Kembang Anak">
+<meta name="author" content="Alivia Sabrina">
+<meta name="description" content="Sistem Informasi Tumbuh Kembang Anak">
+<meta name="keywords" content="Sistem Informasi Tumbuh Kembang Anak">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css" integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css" integrity="sha256-Qsx5lrStHZyR9REqhUF8iQt73X06c8LGIUPzpOhwRrI=" crossorigin="anonymous">
+
+<link rel="icon" href="assets/img/logo.png">
+<link rel="stylesheet" href="css/overlayscrollbars.min.css">
+<link rel="stylesheet" href="css/adminlte.css">
