@@ -26,6 +26,8 @@
                     $password_baru_hash = password_hash($password_baru, PASSWORD_DEFAULT);
                     $update_password = mysqli_query($conn, "UPDATE user SET password = '$password_baru_hash' WHERE id_user = '$id_user'");
                     if ($update_password) {
+                        $log_berhasil = mysqli_query($conn, "INSERT INTO log VALUES ('', 'Password berhasil diperbaharui!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
+
                         echo "
                             <script>
                                 Swal.fire({
@@ -41,6 +43,8 @@
                         ";
                         exit;
                     } else {
+                        $log_gagal = mysqli_query($conn, "INSERT INTO log VALUES ('', 'Password gagal diperbaharui!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
+
                         echo "
                             <script>
                                 Swal.fire({

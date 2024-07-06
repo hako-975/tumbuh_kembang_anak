@@ -20,7 +20,8 @@
 </head> <!--end::Head--> <!--begin::Body-->
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
     <?php 
-        if ($data_user['username'] == 'admin') {
+        $username = $data_user['username'];
+        if ($username == 'admin') {
             echo "
                 <script>
                     Swal.fire({
@@ -101,6 +102,8 @@
             $update_user = mysqli_query($conn, "UPDATE user SET jabatan = '$jabatan', nama = '$nama', foto = '$foto' WHERE id_user = '$id_user'");
 
             if ($update_user) {
+                $log_berhasil = mysqli_query($conn, "INSERT INTO log VALUES ('', 'User $username berhasil diubah!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
+
                 if ($foto_new != '') {
                     $file_tmp = $_FILES['foto']['tmp_name'];     
                     move_uploaded_file($file_tmp, 'assets/img/profiles/' . $foto);
@@ -111,7 +114,7 @@
                         Swal.fire({
                             icon: 'success',
                             title: 'Berhasil!',
-                            text: 'User berhasil diubah!'
+                            text: 'User " . $username . " berhasil diubah!'
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 window.location.href = 'user.php';
@@ -121,12 +124,14 @@
                 ";
                 exit;
             } else {
+                $log_gagal = mysqli_query($conn, "INSERT INTO log VALUES ('', 'User $username gagal diubah!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
+
                 echo "
                     <script>
                         Swal.fire({
                             icon: 'error',
                             title: 'Gagal!',
-                            text: 'User gagal diubah!'
+                            text: 'User " . $username . " gagal diubah!'
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 window.history.back();
@@ -169,7 +174,7 @@
                                     <div class="card-body">
                                         <div class="mb-3"> 
                                             <label for="username" class="form-label">Username</label>
-                                            <input type="text" disabled class="form-control" id="username" name="username" value="<?= $data_user['username']; ?>">
+                                            <input type="text" disabled style="cursor: not-allowed;"  class="form-control" id="username" name="username" value="<?= $data_user['username']; ?>">
                                         </div>
                                         <div class="mb-3"> 
                                             <label for="jabatan" class="form-label">Jabatan</label> 

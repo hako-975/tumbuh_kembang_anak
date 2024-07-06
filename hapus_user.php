@@ -12,8 +12,9 @@
 	$id_user = $_GET['id_user'];
 
     $data_user = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM user WHERE id_user = '$id_user'"));
+    $username = $data_user['username'];
 
-    if ($data_user['username'] == 'admin') {
+    if ($username == 'admin') {
     	echo "
 	        <script>
 	            Swal.fire({
@@ -36,6 +37,8 @@
 	$delete_user = mysqli_query($conn, "DELETE FROM user WHERE id_user = '$id_user'");
 
 	if ($delete_user) {
+        $log_berhasil = mysqli_query($conn, "INSERT INTO log VALUES ('', 'User $username berhasil dihapus!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
+
 		if ($foto != 'default.jpg' && $foto != '') {
 		    if (file_exists($image_path)) {
 		        unlink($image_path);
@@ -47,7 +50,7 @@
 	            Swal.fire({
 	                icon: 'success',
 	                title: 'Berhasil!',
-	                text: 'User berhasil dihapus!'
+	                text: 'User " . $username . " berhasil dihapus!'
 	            }).then((result) => {
 	                if (result.isConfirmed) {
 	                    window.location.href = 'user.php';
@@ -57,12 +60,14 @@
 	    ";
 	    exit;
 	} else {
+        $log_gagal = mysqli_query($conn, "INSERT INTO log VALUES ('', 'User $username gagal dihapus!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
+
 	    echo "
 	        <script>
 	            Swal.fire({
 	                icon: 'error',
 	                title: 'Gagal!',
-	                text: 'User gagal dihapus!'
+	                text: 'User " . $username . " gagal dihapus!'
 	            }).then((result) => {
 	                if (result.isConfirmed) {
 	                    window.location.href = 'user.php';

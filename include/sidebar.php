@@ -24,13 +24,13 @@
                     </a> 
                 </li>
                 <li class="nav-item"> 
-                    <a href="dokter.php" class="nav-link <?= ($_SERVER['REQUEST_URI'] == '/tumbuh_kembang_anak/dokter.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-user-md"></i>
-                        <p>Dokter</p>
+                    <a href="user.php" class="nav-link <?= ($_SERVER['REQUEST_URI'] == '/tumbuh_kembang_anak/user.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-users"></i>
+                        <p>User</p>
                     </a> 
                 </li>
                 <li class="nav-item"> 
-                    <a href="user.php" class="nav-link <?= ($_SERVER['REQUEST_URI'] == '/tumbuh_kembang_anak/user.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-users"></i>
-                        <p>User</p>
+                    <a href="dokter.php" class="nav-link <?= ($_SERVER['REQUEST_URI'] == '/tumbuh_kembang_anak/dokter.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-user-md"></i>
+                        <p>Dokter</p>
                     </a> 
                 </li>
                 <li class="nav-item"> 
@@ -38,7 +38,13 @@
                         <p>Laporan</p>
                     </a>
                 </li>
-            </ul> <!--end::Sidebar Menu-->
+                <hr class="sidebar-divider">
+                <li class="nav-item"> 
+                    <a href="log.php" class="nav-link <?= ($_SERVER['REQUEST_URI'] == '/tumbuh_kembang_anak/log.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-history"></i>
+                        <p>Log</p>
+                    </a>
+                </li>
+            </ul>
         </nav>
-    </div> <!--end::Sidebar Wrapper-->
-</aside> <!--end::Sidebar--> 
+    </div> 
+</aside> 

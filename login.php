@@ -30,6 +30,7 @@
             
             if ($data_user = mysqli_fetch_assoc($query_login)) {
                 if (password_verify($password, $data_user['password'])) {
+                    $log_berhasil = mysqli_query($conn, "INSERT INTO log VALUES ('', 'User $username berhasil login!', CURRENT_TIMESTAMP(), " . $data_user['id_user'] . ")");
                     $_SESSION['id_user'] = $data_user['id_user'];
                     header("Location: index.php");
                     exit;

@@ -115,6 +115,8 @@
             $insert_user = mysqli_query($conn, "INSERT INTO user VALUES ('', '$username', '$password_baru_hash', '$jabatan', '$nama', '$foto', CURRENT_TIMESTAMP())");
 
             if ($insert_user) {
+                $log_berhasil = mysqli_query($conn, "INSERT INTO log VALUES ('', 'User $username berhasil ditambahkan!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
+
                 if ($foto != '') {
                     $file_tmp = $_FILES['foto']['tmp_name'];     
                     move_uploaded_file($file_tmp, 'assets/img/profiles/' . $foto);
@@ -125,7 +127,7 @@
                         Swal.fire({
                             icon: 'success',
                             title: 'Berhasil!',
-                            text: 'User berhasil ditambahkan!'
+                            text: 'User " . $username . " berhasil ditambahkan!'
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 window.location.href = 'user.php';
@@ -135,12 +137,13 @@
                 ";
                 exit;
             } else {
+                $log_gagal = mysqli_query($conn, "INSERT INTO log VALUES ('', 'User $username gagal ditambahkan!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
                 echo "
                     <script>
                         Swal.fire({
                             icon: 'error',
                             title: 'Gagal!',
-                            text: 'User gagal ditambahkan!'
+                            text: 'User " . $username . " gagal ditambahkan!'
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 window.history.back();

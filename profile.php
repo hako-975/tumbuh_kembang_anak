@@ -15,15 +15,15 @@
     <?php include_once 'include/head.php'; ?>
     <style>
         .profile-card {
-            max-width: 300px;
+            max-width: 400px;
             margin: auto;
             background: #ffffff;
-            padding: 20px;
+            padding: 25px;
             box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
         }
         .profile-card img {
-            width: 100%;
+            width: 200px;
             height: auto;
             border-radius: 10px;
         }
@@ -70,14 +70,16 @@
             <div class="app-content"> <!--begin::Container-->
                 <div class="container-fluid">
                     <div class="profile-card mb-3">
-                        <img src="assets/img/profiles/<?= $dataUser['foto']; ?>" alt="Profile Picture">
+                        <div class="text-center">
+                            <img src="assets/img/profiles/<?= $dataUser['foto']; ?>" alt="Profile Picture">
+                        </div>
                         <h3 class="text-center"><?= $dataUser['nama']; ?></h3>
                         <p><strong>Username: </strong><?= $dataUser['username']; ?></p>
                         <p><strong>Jabatan: </strong><?= ucwords($dataUser['jabatan']); ?></p>
                         <p><strong>Dibuat Pada: </strong><?= date('d-M-Y, H:i:s', strtotime($dataUser['dibuat_pada']));; ?></p>
                         <div class="btn-group" role="group">
-                            <a href="ubah_profile.php" class="btn btn-success">Ubah Profile</a>
-                            <a href="ganti_password.php" class="btn btn-danger">Ganti Password</a>
+                            <a href="ubah_profile.php" class="btn btn-success"><i class="fas fa-fw fa-edit"></i> Ubah Profile</a>
+                            <a href="ganti_password.php" class="btn btn-danger"><i class="fas fa-fw fa-lock"></i> Ganti Password</a>
                         </div>
                     </div>
                 </div> <!--end::Container-->

@@ -80,6 +80,8 @@
             $update_profile = mysqli_query($conn, "UPDATE user SET nama = '$nama', foto = '$foto' WHERE id_user = '$id_user'");
 
             if ($update_profile) {
+                $log_berhasil = mysqli_query($conn, "INSERT INTO log VALUES ('', 'Profile berhasil diperbaharui!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
+
                 if ($foto_new != '') {
                     $file_tmp = $_FILES['foto']['tmp_name'];     
                     move_uploaded_file($file_tmp, 'assets/img/profiles/' . $foto);
@@ -99,6 +101,8 @@
                 ";
                 exit;
             } else {
+                $log_gagal = mysqli_query($conn, "INSERT INTO log VALUES ('', 'Profile gagal diperbaharui!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
+
                 echo "
                     <script>
                         Swal.fire({
@@ -147,12 +151,12 @@
                                 <form method="post" enctype="multipart/form-data"> 
                                     <div class="card-body">
                                         <div class="mb-3"> 
-                                            <label for="username" class="form-label">Username</label> 
-                                            <input type="text" disabled class="form-control" id="username" name="username" value="<?= $dataUser['username']; ?>" required>
+                                            <label for="username" class="form-label">Username</label>
+                                            <input type="text" disabled style="cursor: not-allowed;"  class="form-control" id="username" name="username" value="<?= $dataUser['username']; ?>" required>
                                         </div>
                                         <div class="mb-3"> 
                                             <label for="jabatan" class="form-label">Jabatan</label> 
-                                            <select disabled class="form-select" id="jabatan" name="jabatan">
+                                            <select disabled style="cursor: not-allowed;"  class="form-select" id="jabatan" name="jabatan">
                                                 <option value="<?= $dataUser['jabatan']; ?>"><?= ucwords($dataUser['jabatan']); ?></option>
                                             </select>
                                         </div>
