@@ -59,7 +59,7 @@
                                             <tr>
                                                 <td class="text-center align-middle"><?= $i++; ?>.</td>
                                                 <td class="align-middle"><?= $dl['isi_log']; ?></td>
-                                                <td class="align-middle"><?= date('d-M-Y, H:i:s', strtotime($dl['tgl_log']));; ?></td>
+                                                <td class="align-middle"><?= date('d-m-Y, H:i:s', strtotime($dl['tgl_log']));; ?></td>
                                                 <td class="align-middle"><?= ($dl['username']) ? $dl['username'] : 'User sudah terhapus'; ?></td>
                                             </tr>
                                         <?php endforeach ?>

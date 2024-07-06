@@ -66,7 +66,7 @@
                                                 <td class="align-middle"><?= $du['username']; ?></td>
                                                 <td class="align-middle"><?= ucwords($du['jabatan']); ?></td>
                                                 <td class="align-middle"><?= $du['nama']; ?></td>
-                                                <td class="align-middle"><?= date('d-M-Y, H:i:s', strtotime($du['dibuat_pada']));; ?></td>
+                                                <td class="align-middle"><?= date('d-m-Y, H:i:s', strtotime($du['dibuat_pada']));; ?></td>
                                                 <td class="text-center align-middle">
                                                     <?php if ($du['username'] != 'admin'): ?>
                                                         <a href="ubah_user.php?id_user=<?= $du['id_user']; ?>" class="m-1 btn btn-success"><i class="fas fa-fw fa-edit"></i> Ubah</a>
