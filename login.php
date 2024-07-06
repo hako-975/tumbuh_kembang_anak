@@ -86,18 +86,18 @@
                             <input id="username" name="username" autocomplete="off" type="text" class="form-control" value="" placeholder="" required> 
                             <label for="username">Username</label> 
                         </div>
-                        <div class="input-group-text"> <span class="bi bi-person"></span> </div>
+                        <div class="input-group-text"> <span class="fas fa-fw fa-user"></span> </div>
                     </div>
                     <div class="input-group mb-1">
                         <div class="form-floating"> <input id="password" name="password" type="password" class="form-control" placeholder="" required> <label for="password">Password</label> </div>
-                        <div class="input-group-text"> <span class="bi bi-lock-fill"></span> </div>
+                        <div class="input-group-text"> <span class="fas fa-fw fa-lock"></span> </div>
                     </div> <!--begin::Row-->
                     <div class="row mt-3">
                         <div class="col-6 d-inline-flex align-items-center">
                             <a href="forgot-password.html">Lupa Password</a>
                         </div> <!-- /.col -->
                         <div class="col-6 text-end">
-                            <button type="submit" name="btnLogin" class="btn btn-primary">Login <span class="bi bi-box-arrow-in-right"></span></button>
+                            <button type="submit" name="btnLogin" class="btn btn-primary">Login <span class="fas fa-fw fa-sign-in-alt"></span></button>
                         </div> <!-- /.col -->
                     </div> <!--end::Row-->
                 </form>

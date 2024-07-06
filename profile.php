@@ -76,7 +76,7 @@
                         <p><strong>Jabatan: </strong><?= ucwords($dataUser['jabatan']); ?></p>
                         <p><strong>Dibuat Pada: </strong><?= date('d-M-Y, H:i:s', strtotime($dataUser['dibuat_pada']));; ?></p>
                         <div class="btn-group" role="group">
-                            <a href="ubah_profile.php" class="btn btn-primary">Ubah Profile</a>
+                            <a href="ubah_profile.php" class="btn btn-success">Ubah Profile</a>
                             <a href="ganti_password.php" class="btn btn-danger">Ganti Password</a>
                         </div>
                     </div>

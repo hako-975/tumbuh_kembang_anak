@@ -54,6 +54,7 @@
                                 });
                             </script>
                         ";
+                        exit;
                     }
                 } 
                 else 
@@ -71,6 +72,7 @@
                             });
                         </script>
                     ";
+                    exit;
                 }
             } 
             else 

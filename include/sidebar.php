@@ -9,31 +9,32 @@
         <nav class="mt-2"> <!--begin::Sidebar Menu-->
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
                 <li class="nav-item"> 
-                    <a href="index.php" class="nav-link"> <i class="nav-icon bi bi-speedometer"></i>
+                    <a href="index.php" class="nav-link <?= ($_SERVER['REQUEST_URI'] == '/tumbuh_kembang_anak/index.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li class="nav-item"> 
-                    <a href="#" class="nav-link"> <i class="nav-icon bi bi-list"></i>
-                        <p>
-                            Manajemen Data
-                            <i class="nav-arrow bi bi-chevron-right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item"> <a href="./widgets/small-box.html" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                <p>Small Box</p>
-                            </a> </li>
-                        <li class="nav-item"> <a href="./widgets/info-box.html" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                <p>info Box</p>
-                            </a> </li>
-                        <li class="nav-item"> <a href="./widgets/cards.html" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                <p>Cards</p>
-                            </a> </li>
-                    </ul>
+                    <a href="pemeriksaan.php" class="nav-link <?= ($_SERVER['REQUEST_URI'] == '/tumbuh_kembang_anak/pemeriksaan.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-notes-medical"></i>
+                        <p>Pemeriksaan</p>
+                    </a> 
                 </li>
                 <li class="nav-item"> 
-                    <a href="" class="nav-link"> <i class="nav-icon bi bi-file-earmark-text"></i>
+                    <a href="anak.php" class="nav-link <?= ($_SERVER['REQUEST_URI'] == '/tumbuh_kembang_anak/anak.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-baby"></i>
+                        <p>Anak</p>
+                    </a> 
+                </li>
+                <li class="nav-item"> 
+                    <a href="dokter.php" class="nav-link <?= ($_SERVER['REQUEST_URI'] == '/tumbuh_kembang_anak/dokter.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-user-md"></i>
+                        <p>Dokter</p>
+                    </a> 
+                </li>
+                <li class="nav-item"> 
+                    <a href="user.php" class="nav-link <?= ($_SERVER['REQUEST_URI'] == '/tumbuh_kembang_anak/user.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-users"></i>
+                        <p>User</p>
+                    </a> 
+                </li>
+                <li class="nav-item"> 
+                    <a href="laporan.php" class="nav-link <?= ($_SERVER['REQUEST_URI'] == '/tumbuh_kembang_anak/laporan.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-file-alt"></i>
                         <p>Laporan</p>
                     </a>
                 </li>

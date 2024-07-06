@@ -33,7 +33,7 @@
                         <script>
                             Swal.fire({
                                 icon: 'error',
-                                title: 'Perhatian!',
+                                title: 'Gagal!',
                                 text: 'Ukuran file terlalu besar!',
                                 confirmButtonText: 'Kembali'
                             }).then((result) => {
@@ -52,7 +52,7 @@
                         <script>
                             Swal.fire({
                                 icon: 'error',
-                                title: 'Perhatian!',
+                                title: 'Gagal!',
                                 text: 'File yang di upload bukan gambar!',
                                 confirmButtonText: 'Kembali'
                             }).then((result) => {
@@ -67,19 +67,23 @@
 
                 $image_path = 'assets/img/profiles/' . $foto;
                 
-                if (file_exists($image_path)) {
-                    unlink($image_path);
+                if ($foto != 'default.jpg' && $foto != '') {
+                    if (file_exists($image_path)) {
+                        unlink($image_path);
+                    }
                 }
 
                 $foto = uniqid() . '_' . time() . '_' . $foto_new;
-
-                move_uploaded_file($file_tmp, 'assets/img/profiles/' . $foto);
             }
 
             $id_user = $dataUser['id_user'];
             $update_profile = mysqli_query($conn, "UPDATE user SET nama = '$nama', foto = '$foto' WHERE id_user = '$id_user'");
 
             if ($update_profile) {
+                if ($foto_new != '') {
+                    $file_tmp = $_FILES['foto']['tmp_name'];     
+                    move_uploaded_file($file_tmp, 'assets/img/profiles/' . $foto);
+                }
                 echo "
                     <script>
                         Swal.fire({
@@ -103,11 +107,12 @@
                             text: 'Profile gagal diperbaharui!'
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                window.location.href = 'ubah_profile.php';
+                                window.history.back();
                             }
                         });
                     </script>
                 ";
+                exit;
             }
         }
     ?>
@@ -191,19 +196,6 @@
         <?php include_once 'include/footer.php'; ?>
     </div> <!--end::App Wrapper--> 
     <?php include_once 'include/script.php'; ?>
-    
-    <script>
-        function previewImage(event) {
-            var reader = new FileReader();
-            reader.onload = function(){
-                var output = document.getElementById('preview-img');
-                var outputCircle = document.getElementById('preview-img-circle');
-                output.src = reader.result;
-                outputCircle.src = reader.result;
-            };
-            reader.readAsDataURL(event.target.files[0]);
-        }
-    </script>
 </body><!--end::Body-->
 
 </html>
