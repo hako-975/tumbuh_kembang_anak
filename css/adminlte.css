@@ -15459,3 +15459,7 @@ html.maximized-card {
   border-top: 1px solid #dcdcdc; /* Ganti dengan warna yang Anda inginkan */
   margin: .5rem 0; /* Atur margin sesuai keinginan */
 }
+
+.table {
+  width: 100% !important;
+}
