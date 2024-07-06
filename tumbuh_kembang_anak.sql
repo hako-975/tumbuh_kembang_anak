@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 04 Jul 2024 pada 11.19
+-- Waktu pembuatan: 06 Jul 2024 pada 04.17
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 8.2.0
 
@@ -35,6 +35,7 @@ CREATE TABLE `anak` (
   `nama_ibu_kandung` varchar(100) NOT NULL,
   `alamat_orang_tua` text NOT NULL,
   `nomor_telepon_orang_tua` varchar(15) DEFAULT NULL,
+  `foto` text NOT NULL,
   `dibuat_pada` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -49,7 +50,9 @@ CREATE TABLE `dokter` (
   `nama` varchar(100) NOT NULL,
   `spesialisasi` varchar(100) NOT NULL,
   `nomor_telepon` varchar(15) DEFAULT NULL,
-  `alamat` text DEFAULT NULL
+  `alamat` text DEFAULT NULL,
+  `foto` text NOT NULL,
+  `dibuat_pada` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -80,6 +83,8 @@ CREATE TABLE `user` (
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `jabatan` enum('admin','petugas') NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `foto` text NOT NULL,
   `dibuat_pada` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -87,8 +92,9 @@ CREATE TABLE `user` (
 -- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `user` (`id_user`, `username`, `password`, `jabatan`, `dibuat_pada`) VALUES
-(1, 'admin', '$2y$10$uEGn/uxoXPOAOPgBrNnLPeL1cBTvEN9Bf0weoI5d7VvJGUBxTUx.W', 'admin', '2024-07-04 08:52:18');
+INSERT INTO `user` (`id_user`, `username`, `password`, `jabatan`, `nama`, `foto`, `dibuat_pada`) VALUES
+(1, 'admin', '$2y$10$Nu2QcatT0ag8X8jDQoIREOEB0yj26Kx/9apcja0Ine1sRCjcv0zg.', 'admin', 'Administrator', '6688a7d63d645_1720231894_avatar5.png', '2024-07-04 08:52:18'),
+(20, 'alivia123', '$2y$10$PszuD6VZ7N.lKSP7d3IFCudtAwrkgld5D2QOmP0icXoPP007LOvPG', 'petugas', 'Alivia Sabrina', '6688a81f8886c_1720231967_avatar3.png', '2024-07-06 02:12:47');
 
 --
 -- Indexes for dumped tables
@@ -146,7 +152,7 @@ ALTER TABLE `pemeriksaan`
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
