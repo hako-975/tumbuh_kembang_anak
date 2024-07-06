@@ -1,3 +1,16 @@
+<?php 
+    require_once 'connection.php';
+
+    if (isset($_SESSION['id_user'])) {
+        echo "
+            <script>
+                window.location='index.php'
+            </script>
+        ";
+        exit;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en"> <!--begin::Head-->
 
@@ -9,22 +22,11 @@
 <body class="login-page bg-body-secondary">
 
     <?php 
-        require_once 'connection.php';
-
-        if (isset($_SESSION['id_user'])) {
-            echo "
-                <script>
-                    window.location='index.php'
-                </script>
-            ";
-            exit;
-        }
-
         if (isset($_POST['btnLogin'])) {
             $username = $_POST['username'];
             $password = $_POST['password'];
 
-            $query_login = mysqli_query($koneksi, "SELECT * FROM user WHERE username = '$username'");
+            $query_login = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
             
             if ($data_user = mysqli_fetch_assoc($query_login)) {
                 if (password_verify($password, $data_user['password'])) {
@@ -72,7 +74,7 @@
         <div class="card card-outline card-primary">
             <div class="card-header">
                 <div class="text-center">
-                    <img src="assets/img/logo.png" class="mx-auto w-25" alt="Logo">
+                    <img src="assets/img/properties/logo.png" class="mx-auto w-25" alt="Logo">
                 </div>
                 <h2 class="text-center">Sistem Informasi Tumbuh Kembang Anak</h2>
             </div>

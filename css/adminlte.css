@@ -13048,7 +13048,7 @@ textarea.form-control-lg {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 3.5rem;
+  height: 5.5rem;
   padding: 0.8125rem 0.5rem;
   overflow: hidden;
   font-size: 1.25rem;
@@ -13422,7 +13422,7 @@ textarea.form-control-lg {
     max-height: 100vh;
   }
   .sidebar-expand-sm.layout-fixed-complete .app-sidebar .sidebar-wrapper, .sidebar-expand-sm.layout-fixed .app-sidebar .sidebar-wrapper {
-    height: calc(100vh - (calc(3.5rem + 1px)));
+    height: calc(100vh - (calc(5.5rem + 1px)));
   }
   .sidebar-expand-sm.layout-fixed-complete .app-main-wrapper {
     max-height: 100vh;
@@ -13455,7 +13455,7 @@ textarea.form-control-lg {
     margin-left: calc(var(--lte-sidebar-width) * -1);
   }
   .sidebar-expand-sm .app-sidebar .sidebar-wrapper {
-    height: calc(100vh - (calc(3.5rem + 1px)));
+    height: calc(100vh - (calc(5.5rem + 1px)));
   }
   .sidebar-expand-sm.sidebar-open .app-sidebar {
     margin-left: 0;
@@ -13494,7 +13494,7 @@ textarea.form-control-lg {
     max-height: 100vh;
   }
   .sidebar-expand-md.layout-fixed-complete .app-sidebar .sidebar-wrapper, .sidebar-expand-md.layout-fixed .app-sidebar .sidebar-wrapper {
-    height: calc(100vh - (calc(3.5rem + 1px)));
+    height: calc(100vh - (calc(5.5rem + 1px)));
   }
   .sidebar-expand-md.layout-fixed-complete .app-main-wrapper {
     max-height: 100vh;
@@ -13527,7 +13527,7 @@ textarea.form-control-lg {
     margin-left: calc(var(--lte-sidebar-width) * -1);
   }
   .sidebar-expand-md .app-sidebar .sidebar-wrapper {
-    height: calc(100vh - (calc(3.5rem + 1px)));
+    height: calc(100vh - (calc(5.5rem + 1px)));
   }
   .sidebar-expand-md.sidebar-open .app-sidebar {
     margin-left: 0;
@@ -13566,7 +13566,7 @@ textarea.form-control-lg {
     max-height: 100vh;
   }
   .sidebar-expand-lg.layout-fixed-complete .app-sidebar .sidebar-wrapper, .sidebar-expand-lg.layout-fixed .app-sidebar .sidebar-wrapper {
-    height: calc(100vh - (calc(3.5rem + 1px)));
+    height: calc(100vh - (calc(5.5rem + 1px)));
   }
   .sidebar-expand-lg.layout-fixed-complete .app-main-wrapper {
     max-height: 100vh;
@@ -13599,7 +13599,7 @@ textarea.form-control-lg {
     margin-left: calc(var(--lte-sidebar-width) * -1);
   }
   .sidebar-expand-lg .app-sidebar .sidebar-wrapper {
-    height: calc(100vh - (calc(3.5rem + 1px)));
+    height: calc(100vh - (calc(5.5rem + 1px)));
   }
   .sidebar-expand-lg.sidebar-open .app-sidebar {
     margin-left: 0;
@@ -13638,7 +13638,7 @@ textarea.form-control-lg {
     max-height: 100vh;
   }
   .sidebar-expand-xl.layout-fixed-complete .app-sidebar .sidebar-wrapper, .sidebar-expand-xl.layout-fixed .app-sidebar .sidebar-wrapper {
-    height: calc(100vh - (calc(3.5rem + 1px)));
+    height: calc(100vh - (calc(5.5rem + 1px)));
   }
   .sidebar-expand-xl.layout-fixed-complete .app-main-wrapper {
     max-height: 100vh;
@@ -13671,7 +13671,7 @@ textarea.form-control-lg {
     margin-left: calc(var(--lte-sidebar-width) * -1);
   }
   .sidebar-expand-xl .app-sidebar .sidebar-wrapper {
-    height: calc(100vh - (calc(3.5rem + 1px)));
+    height: calc(100vh - (calc(5.5rem + 1px)));
   }
   .sidebar-expand-xl.sidebar-open .app-sidebar {
     margin-left: 0;
@@ -13710,7 +13710,7 @@ textarea.form-control-lg {
     max-height: 100vh;
   }
   .sidebar-expand-xxl.layout-fixed-complete .app-sidebar .sidebar-wrapper, .sidebar-expand-xxl.layout-fixed .app-sidebar .sidebar-wrapper {
-    height: calc(100vh - (calc(3.5rem + 1px)));
+    height: calc(100vh - (calc(5.5rem + 1px)));
   }
   .sidebar-expand-xxl.layout-fixed-complete .app-main-wrapper {
     max-height: 100vh;
@@ -13743,7 +13743,7 @@ textarea.form-control-lg {
     margin-left: calc(var(--lte-sidebar-width) * -1);
   }
   .sidebar-expand-xxl .app-sidebar .sidebar-wrapper {
-    height: calc(100vh - (calc(3.5rem + 1px)));
+    height: calc(100vh - (calc(5.5rem + 1px)));
   }
   .sidebar-expand-xxl.sidebar-open .app-sidebar {
     margin-left: 0;
@@ -13781,7 +13781,7 @@ textarea.form-control-lg {
   max-height: 100vh;
 }
 .sidebar-expand.layout-fixed-complete .app-sidebar .sidebar-wrapper, .sidebar-expand.layout-fixed .app-sidebar .sidebar-wrapper {
-  height: calc(100vh - (calc(3.5rem + 1px)));
+  height: calc(100vh - (calc(5.5rem + 1px)));
 }
 .sidebar-expand.layout-fixed-complete .app-main-wrapper {
   max-height: 100vh;
@@ -13812,7 +13812,7 @@ textarea.form-control-lg {
   margin-left: calc(var(--lte-sidebar-width) * -1);
 }
 .sidebar-expand .app-sidebar .sidebar-wrapper {
-  height: calc(100vh - (calc(3.5rem + 1px)));
+  height: calc(100vh - (calc(5.5rem + 1px)));
 }
 .sidebar-expand.sidebar-open .app-sidebar {
   margin-left: 0;
@@ -15449,3 +15449,7 @@ html.maximized-card {
 }
 
 /*# sourceMappingURL=adminlte.css.map */
+
+.custom-dropdown-menu {
+    width: 150px !important; /* Adjust the width as needed */
+}
