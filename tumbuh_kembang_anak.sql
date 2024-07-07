@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 06 Jul 2024 pada 18.01
+-- Waktu pembuatan: 07 Jul 2024 pada 05.01
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 8.2.0
 
@@ -33,11 +33,18 @@ CREATE TABLE `anak` (
   `tanggal_lahir` date NOT NULL,
   `jenis_kelamin` enum('laki-laki','perempuan') NOT NULL,
   `nama_ibu_kandung` varchar(100) NOT NULL,
+  `no_telepon_orang_tua` varchar(15) DEFAULT NULL,
   `alamat_orang_tua` text NOT NULL,
-  `nomor_telepon_orang_tua` varchar(15) DEFAULT NULL,
   `foto` text NOT NULL,
   `dibuat_pada` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `anak`
+--
+
+INSERT INTO `anak` (`id_anak`, `nama`, `tanggal_lahir`, `jenis_kelamin`, `nama_ibu_kandung`, `no_telepon_orang_tua`, `alamat_orang_tua`, `foto`, `dibuat_pada`) VALUES
+(3, 'iireng schrodinger', '2024-07-07', 'perempuan', 'igi', '0', 'rumah', '668a04e15cb39_1720321249_jbc-TK_d8kni3OI-unsplash.jpg', '2024-07-07 02:09:31');
 
 -- --------------------------------------------------------
 
@@ -100,7 +107,25 @@ INSERT INTO `log` (`id_log`, `isi_log`, `tgl_log`, `id_user`) VALUES
 (18, 'Dokter Andri Firman Saputra123 berhasil diubah!', '2024-07-06 16:00:13', 1),
 (19, 'Dokter Andri Firman Saputra123 berhasil diubah!', '2024-07-06 16:00:21', 1),
 (20, 'Dokter Andri Firman Saputra123 berhasil diubah!', '2024-07-06 16:00:26', 1),
-(21, 'Dokter Andri Firman Saputra berhasil diubah!', '2024-07-06 16:00:41', 1);
+(21, 'Dokter Andri Firman Saputra berhasil diubah!', '2024-07-06 16:00:41', 1),
+(22, 'Anak asd berhasil ditambahkan!', '2024-07-06 16:13:18', 1),
+(23, 'Anak asd berhasil dihapus!', '2024-07-06 16:15:29', 1),
+(24, 'Anak Alivia Sabrina berhasil ditambahkan!', '2024-07-06 16:15:48', 1),
+(25, 'Anak Alivia Sabrina123 berhasil diubah!', '2024-07-06 16:19:19', 1),
+(26, 'Anak Alivia Sabrina123 berhasil dihapus!', '2024-07-06 16:19:35', 1),
+(27, 'User admin berhasil login!', '2024-07-07 01:55:24', 1),
+(28, 'Anak ii berhasil ditambahkan!', '2024-07-07 02:09:31', 1),
+(29, 'Anak iireng schrodinger berhasil diubah!', '2024-07-07 02:10:34', 1),
+(30, 'Pemeriksaan iireng schrodinger berhasil ditambahkan!', '2024-07-07 02:43:56', 1),
+(31, 'Pemeriksaan iireng schrodinger berhasil dihapus!', '2024-07-07 02:46:09', 1),
+(32, 'Pemeriksaan iireng schrodinger berhasil ditambahkan!', '2024-07-07 02:46:32', 1),
+(33, 'Pemeriksaan iireng schrodinger berhasil dihapus!', '2024-07-07 02:48:51', 1),
+(34, 'Pemeriksaan iireng schrodinger berhasil ditambahkan!', '2024-07-07 02:49:11', 1),
+(35, 'Pemeriksaan iireng schrodinger berhasil diubah!', '2024-07-07 02:58:16', 1),
+(36, 'Pemeriksaan iireng schrodinger berhasil diubah!', '2024-07-07 02:58:38', 1),
+(37, 'Pemeriksaan iireng schrodinger berhasil diubah!', '2024-07-07 02:58:43', 1),
+(38, 'Pemeriksaan iireng schrodinger berhasil diubah!', '2024-07-07 03:00:20', 1),
+(39, 'Anak iireng schrodinger berhasil diubah!', '2024-07-07 03:00:49', 1);
 
 -- --------------------------------------------------------
 
@@ -117,8 +142,16 @@ CREATE TABLE `pemeriksaan` (
   `lingkar_kepala` decimal(5,2) DEFAULT NULL,
   `tanggal_pengamatan` datetime NOT NULL,
   `catatan` text DEFAULT NULL,
+  `foto` text NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `pemeriksaan`
+--
+
+INSERT INTO `pemeriksaan` (`id_pemeriksaan`, `id_anak`, `id_dokter`, `berat_badan`, `tinggi_badan`, `lingkar_kepala`, `tanggal_pengamatan`, `catatan`, `foto`, `id_user`) VALUES
+(3, 3, 3, '21.69', '123.42', '33.69', '2024-07-07 09:48:00', 'tes123', '668a04c43d80d_1720321220_644e0627aff5b.jpeg', 1);
 
 -- --------------------------------------------------------
 
@@ -190,7 +223,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `anak`
 --
 ALTER TABLE `anak`
-  MODIFY `id_anak` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_anak` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `dokter`
@@ -202,13 +235,13 @@ ALTER TABLE `dokter`
 -- AUTO_INCREMENT untuk tabel `log`
 --
 ALTER TABLE `log`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT untuk tabel `pemeriksaan`
 --
 ALTER TABLE `pemeriksaan`
-  MODIFY `id_pemeriksaan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pemeriksaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
