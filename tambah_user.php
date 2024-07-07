@@ -6,7 +6,6 @@
         exit;
     }
 
-    $user = mysqli_query($conn, "SELECT * FROM user ORDER BY username ASC");
 ?>
 
 <!DOCTYPE html>
@@ -60,6 +59,24 @@
             }
             
             $jabatan = htmlspecialchars($_POST['jabatan']);
+            if ($jabatan == '0') {
+                echo "
+                    <script>
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal!',
+                            text: 'Pilih jabatan user!',
+                            confirmButtonText: 'Kembali'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.history.back();
+                            }
+                        });
+                    </script>
+                ";
+                exit;
+            }
+
             $nama = htmlspecialchars($_POST['nama']);
 
             $foto = $_FILES['foto']['name'];
@@ -199,6 +216,7 @@
                                         <div class="mb-3"> 
                                             <label for="jabatan" class="form-label">Jabatan</label> 
                                             <select class="form-select" id="jabatan" name="jabatan">
+                                                <option value="0">--- Pilih Jabatan ---</option>
                                                 <option value="admin"><?= ucwords('admin'); ?></option>
                                                 <option value="petugas"><?= ucwords('petugas'); ?></option>
                                             </select>

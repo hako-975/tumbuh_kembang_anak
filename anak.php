@@ -74,10 +74,8 @@
                                                 <td class="align-middle"><?= $da['alamat_orang_tua']; ?></td>
                                                 <td class="align-middle"><?= date('d-m-Y, H:i:s', strtotime($da['dibuat_pada']));; ?></td>
                                                 <td class="text-center align-middle">
-                                                    <?php if ($da['nama'] != 'admin'): ?>
-                                                        <a href="ubah_anak.php?id_anak=<?= $da['id_anak']; ?>" class="m-1 btn btn-success"><i class="fas fa-fw fa-edit"></i> Ubah</a>
-                                                        <a href="hapus_anak.php?id_anak=<?= $da['id_anak']; ?>" data-nama="<?= $da['nama']; ?>" class="m-1 btn btn-danger btn-delete"><i class="fas fa-fw fa-trash"></i> Hapus</a>
-                                                    <?php endif ?>
+                                                    <a href="ubah_anak.php?id_anak=<?= $da['id_anak']; ?>" class="m-1 btn btn-success"><i class="fas fa-fw fa-edit"></i> Ubah</a>
+                                                    <a href="hapus_anak.php?id_anak=<?= $da['id_anak']; ?>" data-nama="<?= $da['nama']; ?>" class="m-1 btn btn-danger btn-delete"><i class="fas fa-fw fa-trash"></i> Hapus</a>
                                                 </td>
                                             </tr>
                                         <?php endforeach ?>

@@ -6,42 +6,27 @@
         exit;
     }
 
+    $anak = mysqli_query($conn, "SELECT * FROM anak ORDER BY nama ASC");
+    $dokter = mysqli_query($conn, "SELECT * FROM dokter ORDER BY nama ASC");
 ?>
 
 <!DOCTYPE html>
 <html lang="en"> <!--begin::Head-->
 
 <head>
-    <title>Tambah Anak</title>
+    <title>Tambah Pemeriksaan</title>
     <?php include_once 'include/head.php'; ?>
 </head> <!--end::Head--> <!--begin::Body-->
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
     <?php 
-        if (isset($_POST['btnTambahAnak'])) {
-            $nama = htmlspecialchars($_POST['nama']);
-            $tanggal_lahir = htmlspecialchars($_POST['tanggal_lahir']);
-            $jenis_kelamin = htmlspecialchars($_POST['jenis_kelamin']);
-            $nama_ibu_kandung = htmlspecialchars($_POST['nama_ibu_kandung']);
-            $no_telepon_orang_tua = htmlspecialchars($_POST['no_telepon_orang_tua']);
-            $alamat_orang_tua = htmlspecialchars($_POST['alamat_orang_tua']);
-            
-            if ($jenis_kelamin == '0') {
-                echo "
-                    <script>
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Gagal!',
-                            text: 'Pilih jenis kelamin anak!',
-                            confirmButtonText: 'Kembali'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.history.back();
-                            }
-                        });
-                    </script>
-                ";
-                exit;
-            }
+        if (isset($_POST['btnTambahPemeriksaan'])) {
+            $id_anak = htmlspecialchars($_POST['id_anak']);
+            $id_dokter = htmlspecialchars($_POST['id_dokter']);
+            $berat_badan = htmlspecialchars($_POST['berat_badan']);
+            $tinggi_badan = htmlspecialchars($_POST['tinggi_badan']);
+            $lingkar_kepala = htmlspecialchars($_POST['lingkar_kepala']);
+            $tanggal_pengamatan = htmlspecialchars($_POST['tanggal_pengamatan']);
+            $catatan = htmlspecialchars($_POST['catatan']);
 
             $foto = $_FILES['foto']['name'];
             if ($foto != '') {
@@ -93,10 +78,12 @@
                 $foto = 'default.jpg';
             }
 
-            $insert_anak = mysqli_query($conn, "INSERT INTO anak VALUES ('', '$nama', '$tanggal_lahir', '$jenis_kelamin', '$nama_ibu_kandung', '$no_telepon_orang_tua', '$alamat_orang_tua', '$foto', CURRENT_TIMESTAMP())");
-
-            if ($insert_anak) {
-                $log_berhasil = mysqli_query($conn, "INSERT INTO log VALUES ('', 'Anak $nama berhasil ditambahkan!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
+            $insert_pemeriksaan = mysqli_query($conn, "INSERT INTO pemeriksaan VALUES ('', '$id_anak', '$id_dokter', '$berat_badan', '$tinggi_badan', '$lingkar_kepala', '$tanggal_pengamatan', '$catatan', '$foto', " . $dataUser['id_user'] . ")");
+            
+            $data_anak = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM anak WHERE id_anak = '$id_anak'"));
+            $nama_anak = $data_anak['nama'];
+            if ($insert_pemeriksaan) {
+                $log_berhasil = mysqli_query($conn, "INSERT INTO log VALUES ('', 'Pemeriksaan $nama_anak berhasil ditambahkan!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
 
                 if ($foto != '') {
                     $file_tmp = $_FILES['foto']['tmp_name'];     
@@ -108,23 +95,23 @@
                         Swal.fire({
                             icon: 'success',
                             title: 'Berhasil!',
-                            text: 'Anak " . $nama . " berhasil ditambahkan!'
+                            text: 'Pemeriksaan " . $nama_anak . " berhasil ditambahkan!'
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                window.location.href = 'anak.php';
+                                window.location.href = 'pemeriksaan.php';
                             }
                         });
                     </script>
                 ";
                 exit;
             } else {
-                $log_gagal = mysqli_query($conn, "INSERT INTO log VALUES ('', 'Anak $nama gagal ditambahkan!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
+                $log_gagal = mysqli_query($conn, "INSERT INTO log VALUES ('', 'Pemeriksaan $nama_anak gagal ditambahkan!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
                 echo "
                     <script>
                         Swal.fire({
                             icon: 'error',
                             title: 'Gagal!',
-                            text: 'Anak " . $nama . " gagal ditambahkan!'
+                            text: 'Pemeriksaan " . $nama_anak . " gagal ditambahkan!'
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 window.history.back();
@@ -145,13 +132,13 @@
                 <div class="container-fluid"> <!--begin::Row-->
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Tambah Anak</h3>
+                            <h3 class="mb-0">Tambah Pemeriksaan</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
-                                <li class="breadcrumb-item"><a href="anak.php">Anak</a></li>
+                                <li class="breadcrumb-item"><a href="pemeriksaan.php">Pemeriksaan</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Tambah Anak
+                                    Tambah Pemeriksaan
                                 </li>
                             </ol>
                         </div>
@@ -166,35 +153,45 @@
                                 <form method="post" enctype="multipart/form-data"> 
                                     <div class="card-body">
                                         <div class="mb-3"> 
-                                            <label for="nama" class="form-label">Nama Anak</label>
-                                            <input type="text" class="form-control" id="nama" name="nama" required>
-                                        </div>
-                                        <div class="mb-3"> 
-                                            <label for="tanggal_lahir" class="form-label">Tanggal Lahir Anak</label>
-                                            <input type="date" value="<?= date('Y-m-d'); ?>" class="form-control" id="tanggal_lahir" name="tanggal_lahir" required>
-                                        </div>
-                                        <div class="mb-3"> 
-                                            <label for="jenis_kelamin" class="form-label">Jenis Kelamin Anak</label> 
-                                            <select class="form-select" id="jenis_kelamin" name="jenis_kelamin">
-                                                <option value="0">--- Pilih Jenis Kelamin ---</option>
-                                                <option value="laki-laki"><?= ucwords('laki-laki'); ?></option>
-                                                <option value="perempuan"><?= ucwords('perempuan'); ?></option>
+                                            <label for="id_anak" class="form-label">Nama Anak & Ibu Kandung</label> 
+                                            <select class="form-select" id="id_anak" name="id_anak">
+                                                <option value="0">--- Pilih Nama Anak & Ibu Kandung ---</option>
+                                                <?php foreach ($anak as $da): ?>
+                                                    <option value="<?= $da['id_anak']; ?>">Nama Anak: <?= $da['nama']; ?> | Nama Ibu Kandung: <?= $da['nama_ibu_kandung']; ?></option>
+                                                <?php endforeach ?>
                                             </select>
                                         </div>
                                         <div class="mb-3"> 
-                                            <label for="nama_ibu_kandung" class="form-label">Nama Ibu Kandung</label>
-                                            <input type="text" class="form-control" id="nama_ibu_kandung" name="nama_ibu_kandung" required>
+                                            <label for="id_dokter" class="form-label">Nama Dokter & Spesialis</label> 
+                                            <select class="form-select" id="id_dokter" name="id_dokter">
+                                                <option value="0">--- Pilih Nama Dokter & Spesialis ---</option>
+                                                <?php foreach ($dokter as $dd): ?>
+                                                    <option value="<?= $dd['id_dokter']; ?>">Nama Dokter: <?= $dd['nama']; ?> | Spesialis: <?= $dd['spesialis']; ?></option>
+                                                <?php endforeach ?>
+                                            </select>
                                         </div>
                                         <div class="mb-3"> 
-                                            <label for="no_telepon_orang_tua" class="form-label">No. Telepon Orang Tua</label> 
-                                            <input type="number" class="form-control" id="no_telepon_orang_tua" name="no_telepon_orang_tua" required>
+                                            <label for="berat_badan" class="form-label">Berat Badan Anak (Kg)</label> 
+                                            <input type="number" step=".01" class="form-control" id="berat_badan" name="berat_badan" required>
                                         </div>
                                         <div class="mb-3"> 
-                                            <label for="alamat_orang_tua" class="form-label">Alamat Orang Tua</label>
-                                            <textarea class="form-control" id="alamat_orang_tua" name="alamat_orang_tua" required></textarea>
+                                            <label for="tinggi_badan" class="form-label">Tinggi Badan Anak (Cm)</label> 
+                                            <input type="number" step=".01" class="form-control" id="tinggi_badan" name="tinggi_badan" required>
+                                        </div>
+                                        <div class="mb-3"> 
+                                            <label for="lingkar_kepala" class="form-label">Lingkar Kepala Anak (Cm)</label> 
+                                            <input type="number" step=".01" class="form-control" id="lingkar_kepala" name="lingkar_kepala" required>
+                                        </div>
+                                        <div class="mb-3"> 
+                                            <label for="tanggal_pengamatan" class="form-label">Tanggal Pengamatan</label> 
+                                            <input type="datetime-local" value="<?= date('Y-m-d\TH:i', time()); ?>" class="form-control" id="tanggal_pengamatan" name="tanggal_pengamatan" required>
+                                        </div>
+                                        <div class="mb-3"> 
+                                            <label for="catatan" class="form-label">Catatan</label>
+                                            <textarea class="form-control" id="catatan" name="catatan" placeholder="(Opsional)"></textarea>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="foto" class="form-label">Foto</label>
+                                            <label for="foto" class="form-label">Foto Anak</label>
                                             <div class="input-group">
                                                 <input type="file" class="form-control" id="foto" name="foto" onchange="previewImage(event)"> 
                                                 <label class="input-group-text" for="foto">Upload</label> 
@@ -202,7 +199,7 @@
                                         </div>
                                     </div> 
                                     <div class="card-footer pt-3">
-                                        <button type="submit" name="btnTambahAnak" class="btn btn-primary">Submit</button>
+                                        <button type="submit" name="btnTambahPemeriksaan" class="btn btn-primary">Submit</button>
                                     </div> 
                                 </form> <!--end::Form-->
                             </div>

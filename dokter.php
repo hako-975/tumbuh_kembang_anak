@@ -70,10 +70,8 @@
                                                 <td class="align-middle"><?= $dd['alamat']; ?></td>
                                                 <td class="align-middle"><?= date('d-m-Y, H:i:s', strtotime($dd['dibuat_pada']));; ?></td>
                                                 <td class="text-center align-middle">
-                                                    <?php if ($dd['nama'] != 'admin'): ?>
-                                                        <a href="ubah_dokter.php?id_dokter=<?= $dd['id_dokter']; ?>" class="m-1 btn btn-success"><i class="fas fa-fw fa-edit"></i> Ubah</a>
-                                                        <a href="hapus_dokter.php?id_dokter=<?= $dd['id_dokter']; ?>" data-nama="<?= $dd['nama']; ?>" class="m-1 btn btn-danger btn-delete"><i class="fas fa-fw fa-trash"></i> Hapus</a>
-                                                    <?php endif ?>
+                                                    <a href="ubah_dokter.php?id_dokter=<?= $dd['id_dokter']; ?>" class="m-1 btn btn-success"><i class="fas fa-fw fa-edit"></i> Ubah</a>
+                                                    <a href="hapus_dokter.php?id_dokter=<?= $dd['id_dokter']; ?>" data-nama="<?= $dd['nama']; ?>" class="m-1 btn btn-danger btn-delete"><i class="fas fa-fw fa-trash"></i> Hapus</a>
                                                 </td>
                                             </tr>
                                         <?php endforeach ?>

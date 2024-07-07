@@ -6,7 +6,6 @@
         exit;
     }
 
-    $dokter = mysqli_query($conn, "SELECT * FROM dokter ORDER BY nama ASC");
 ?>
 
 <!DOCTYPE html>
