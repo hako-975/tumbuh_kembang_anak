@@ -79,7 +79,7 @@
                 </div>
                 <h2 class="text-center">Sistem Informasi Tumbuh Kembang Anak</h2>
             </div>
-            <div class="card-body login-card-body">
+            <div class="card-body login-card-body pb-0 pt-2">
                 <h4 class="text-dark text-center">User Login</h4>
                 <form method="post">
                     <div class="input-group mb-1">
@@ -102,7 +102,10 @@
                         </div> <!-- /.col -->
                     </div> <!--end::Row-->
                 </form>
-            </div> <!-- /.login-card-body -->
+            </div> 
+            <div class="card-footer">
+                <p class="m-0 p-0">Copyright &copy; 2024 Posyandu Seroja.</p>
+            </div>
         </div>
     </div> <!-- /.login-box --> <!--begin::Third Party Plugin(OverlayScrollbars)-->
     <?php include_once 'include/script.php'; ?>
