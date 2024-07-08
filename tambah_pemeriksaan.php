@@ -6,6 +6,11 @@
         exit;
     }
 
+    if (isset($_GET['id_anak'])) {
+        $id_anak = $_GET['id_anak'];
+        $data_anak = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM anak WHERE id_anak = '$id_anak'"));
+    }
+
     $anak = mysqli_query($conn, "SELECT * FROM anak ORDER BY nama ASC");
     $dokter = mysqli_query($conn, "SELECT * FROM dokter ORDER BY nama ASC");
 ?>
@@ -54,7 +59,7 @@
                     exit;
                 }
 
-                if(!in_array($extension_lower, $acc_extension))
+                if (!in_array($extension_lower, $acc_extension))
                 {
                     echo "
                         <script>
@@ -89,21 +94,38 @@
                     $file_tmp = $_FILES['foto']['tmp_name'];     
                     move_uploaded_file($file_tmp, 'assets/img/profiles/' . $foto);
                 }
-
-                echo "
-                    <script>
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Berhasil!',
-                            text: 'Pemeriksaan " . $nama_anak . " berhasil ditambahkan!'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.location.href = 'pemeriksaan.php';
-                            }
-                        });
-                    </script>
-                ";
-                exit;
+            
+                if (isset($_GET['id_anak'])) {
+                    echo "
+                        <script>
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Berhasil!',
+                                text: 'Pemeriksaan " . $nama_anak . " berhasil ditambahkan!'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = 'detail_anak.php?id_anak=".$id_anak."';
+                                }
+                            });
+                        </script>
+                    ";
+                    exit;
+                } else {
+                    echo "
+                        <script>
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Berhasil!',
+                                text: 'Pemeriksaan " . $nama_anak . " berhasil ditambahkan!'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = 'pemeriksaan.php';
+                                }
+                            });
+                        </script>
+                    ";
+                    exit;
+                }
             } else {
                 $log_gagal = mysqli_query($conn, "INSERT INTO log VALUES ('', 'Pemeriksaan $nama_anak gagal ditambahkan!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
                 echo "
@@ -155,10 +177,19 @@
                                         <div class="mb-3"> 
                                             <label for="id_anak" class="form-label">Nama Anak & Ibu Kandung</label> 
                                             <select class="form-select" id="id_anak" name="id_anak">
-                                                <option value="0">--- Pilih Nama Anak & Ibu Kandung ---</option>
-                                                <?php foreach ($anak as $da): ?>
-                                                    <option value="<?= $da['id_anak']; ?>">Nama Anak: <?= $da['nama']; ?> | Nama Ibu Kandung: <?= $da['nama_ibu_kandung']; ?></option>
-                                                <?php endforeach ?>
+                                                <?php if (isset($_GET['id_anak'])): ?>
+                                                    <option value="<?= $id_anak; ?>">Nama Anak: <?= $data_anak['nama']; ?> | Nama Ibu Kandung: <?= $data_anak['nama_ibu_kandung']; ?></option>
+                                                    <?php foreach ($anak as $da): ?>
+                                                        <?php if ($id_anak != $da['id_anak']): ?>
+                                                            <option value="<?= $da['id_anak']; ?>">Nama Anak: <?= $da['nama']; ?> | Nama Ibu Kandung: <?= $da['nama_ibu_kandung']; ?></option>
+                                                        <?php endif ?>
+                                                    <?php endforeach ?>
+                                                <?php else: ?>
+                                                    <option value="0">--- Pilih Nama Anak & Ibu Kandung ---</option>
+                                                    <?php foreach ($anak as $da): ?>
+                                                        <option value="<?= $da['id_anak']; ?>">Nama Anak: <?= $da['nama']; ?> | Nama Ibu Kandung: <?= $da['nama_ibu_kandung']; ?></option>
+                                                    <?php endforeach ?>
+                                                <?php endif ?>
                                             </select>
                                         </div>
                                         <div class="mb-3"> 
@@ -191,7 +222,7 @@
                                             <textarea class="form-control" id="catatan" name="catatan" placeholder="(Opsional)"></textarea>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="foto" class="form-label">Foto Anak</label>
+                                            <label for="foto" class="form-label">Foto Anak Terbaru</label>
                                             <div class="input-group">
                                                 <input type="file" class="form-control" id="foto" name="foto" onchange="previewImage(event)"> 
                                                 <label class="input-group-text" for="foto">Upload</label> 
