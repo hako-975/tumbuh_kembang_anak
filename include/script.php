@@ -8,6 +8,9 @@
 <script src="assets/vendor/datatables/js/dataTables.js"></script>
 <script src="assets/vendor/datatables/js/dataTables.bootstrap5.js"></script>
 
+<!-- chartjs -->
+<script src="assets/vendor/chartjs/chart.js"></script>
+
 <script>
     $(document).ready(function() {
         $('#table_id').DataTable({

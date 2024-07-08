@@ -11,7 +11,25 @@
     $data_anak = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM anak WHERE id_anak = '$id_anak'"));
     
     $pemeriksaan = mysqli_query($conn, "SELECT *, anak.nama as nama_anak, pemeriksaan.foto as foto_anak, dokter.nama as nama_dokter FROM pemeriksaan LEFT JOIN anak ON pemeriksaan.id_anak = anak.id_anak LEFT JOIN dokter ON pemeriksaan.id_dokter = dokter.id_dokter LEFT JOIN user ON pemeriksaan.id_user = user.id_user WHERE pemeriksaan.id_anak = '$id_anak' ORDER BY tanggal_pengamatan DESC");
+    
+    $chart_pemeriksaan = mysqli_query($conn, "SELECT *, anak.nama as nama_anak, pemeriksaan.foto as foto_anak, dokter.nama as nama_dokter FROM pemeriksaan LEFT JOIN anak ON pemeriksaan.id_anak = anak.id_anak LEFT JOIN dokter ON pemeriksaan.id_dokter = dokter.id_dokter LEFT JOIN user ON pemeriksaan.id_user = user.id_user WHERE pemeriksaan.id_anak = '$id_anak' ORDER BY tanggal_pengamatan ASC");
 
+    $data_pemeriksaan = [];
+    while ($row = mysqli_fetch_assoc($chart_pemeriksaan)) {
+        $row['tanggal_pengamatan'] = date('d-m-Y (H:i)', strtotime($row['tanggal_pengamatan']));
+        $data_pemeriksaan[] = $row;
+    }
+
+    // Convert data to JSON
+    $labels = array_column($data_pemeriksaan, 'tanggal_pengamatan');
+    $beratBadanData = array_column($data_pemeriksaan, 'berat_badan');
+    $tinggiBadanData = array_column($data_pemeriksaan, 'tinggi_badan');
+    $lingkarKepalaData = array_column($data_pemeriksaan, 'lingkar_kepala');
+
+    $labels_json = json_encode($labels);
+    $beratBadanData_json = json_encode($beratBadanData);
+    $tinggiBadanData_json = json_encode($tinggiBadanData);
+    $lingkarKepalaData_json = json_encode($lingkarKepalaData);
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +40,7 @@
     <?php include_once 'include/head.php'; ?>
     <style>
         .profile-card {
-            max-width: 400px;
+            width: 100%;
             margin: auto;
             background: #ffffff;
             padding: 25px;
@@ -60,10 +78,10 @@
             <div class="app-content-header"> <!--begin::Container-->
                 <div class="container-fluid"> <!--begin::Row-->
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-8">
                             <h3 class="mb-0"><i class="nav-icon fas fa-fw fa-baby"></i> Detail Anak - <?= $data_anak['nama']; ?></h3>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="anak.php">Anak</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
@@ -76,20 +94,39 @@
             </div>
             <div class="app-content"> <!--begin::Container-->
                 <div class="container-fluid"> <!-- Info boxes -->
-                    <div class="profile-card mb-3">
-                        <div class="text-center">
-                            <img src="assets/img/profiles/<?= $data_anak['foto']; ?>" alt="<?= $data_anak['foto']; ?>">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="profile-card mb-3">
+                                <div class="text-center">
+                                    <img src="assets/img/profiles/<?= $data_anak['foto']; ?>" alt="<?= $data_anak['foto']; ?>">
+                                </div>
+                                <h3 class="text-center"><?= $data_anak['nama']; ?></h3>
+                                <p><strong>Tanggal Lahir: </strong><?= date('d-m-Y', strtotime($data_anak['tanggal_lahir']));; ?></p>
+                                <p><strong>Jenis Kelamin: </strong><?= ucwords($data_anak['jenis_kelamin']); ?></p>
+                                <p><strong>Nama Ibu Kandung: </strong><?= $data_anak['nama_ibu_kandung']; ?></p>
+                                <p><strong>No. Telepon Orang Tua: </strong><?= $data_anak['no_telepon_orang_tua']; ?></p>
+                                <p><strong>Alamat Orang Tua: </strong><?= $data_anak['alamat_orang_tua']; ?></p>
+                                <p><strong>Dibuat Pada: </strong><?= date('d-m-Y, H:i:s', strtotime($data_anak['dibuat_pada']));; ?></p>
+                                <div class="btn-group" role="group">
+                                    <a href="ubah_anak.php?id_anak=<?= $data_anak['id_anak']; ?>" class="btn btn-success"><i class="fas fa-fw fa-edit"></i> Ubah</a>
+                                    <a href="hapus_anak.php?id_anak=<?= $data_anak['id_anak']; ?>" data-nama="<?= $data_anak['nama']; ?>" class="btn btn-danger btn-delete"><i class="fas fa-fw fa-trash"></i> Hapus</a>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="text-center"><?= $data_anak['nama']; ?></h3>
-                        <p><strong>Tanggal Lahir: </strong><?= date('d-m-Y', strtotime($data_anak['tanggal_lahir']));; ?></p>
-                        <p><strong>Jenis Kelamin: </strong><?= ucwords($data_anak['jenis_kelamin']); ?></p>
-                        <p><strong>Nama Ibu Kandung: </strong><?= $data_anak['nama_ibu_kandung']; ?></p>
-                        <p><strong>No. Telepon Orang Tua: </strong><?= $data_anak['no_telepon_orang_tua']; ?></p>
-                        <p><strong>Alamat Orang Tua: </strong><?= $data_anak['alamat_orang_tua']; ?></p>
-                        <p><strong>Dibuat Pada: </strong><?= date('d-m-Y, H:i:s', strtotime($data_anak['dibuat_pada']));; ?></p>
-                        <div class="btn-group" role="group">
-                            <a href="ubah_anak.php?id_anak=<?= $data_anak['id_anak']; ?>" class="btn btn-success"><i class="fas fa-fw fa-edit"></i> Ubah</a>
-                            <a href="hapus_anak.php?id_anak=<?= $data_anak['id_anak']; ?>" data-nama="<?= $data_anak['nama']; ?>" class="btn btn-danger btn-delete"><i class="fas fa-fw fa-trash"></i> Hapus</a>
+                        <div class="col-7">
+                            <div class="card mb-4">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h3 class="card-title"><i class="fas fa-fw fa-chart-line"></i> Grafik Tumbuh Kembang Anak</h3>
+                                    <div class="text-end ms-auto">
+                                        <button type="button" id="btnLine" class="btn btn-primary"><i class="fas fa-fw fa-chart-line"></i> Garis</button>
+                                        <button type="button" id="btnBar" class="btn btn-primary"><i class="fas fa-fw fa-chart-bar"></i> Batang</button>
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+                                    <canvas id="tumbuhChart" width="100%"></canvas>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="card">
@@ -143,6 +180,89 @@
         <?php include_once 'include/footer.php'; ?>
     </div> <!--end::App Wrapper--> 
     <?php include_once 'include/script.php'; ?>
+    <script>
+    $(document).ready(function() {
+        // Data for charts, replace this with your actual data
+        var labels = <?= $labels_json; ?>;
+        var beratBadanData = <?= $beratBadanData_json; ?>;
+        var tinggiBadanData = <?= $tinggiBadanData_json; ?>;
+        var lingkarKepalaData = <?= $lingkarKepalaData_json; ?>;
+
+        var ctx = document.getElementById('tumbuhChart').getContext('2d');
+
+        var chartType = 'line';
+
+        var chartData = {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Berat Badan (kg)',
+                    data: beratBadanData,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Tinggi Badan (cm)',
+                    data: tinggiBadanData,
+                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                    borderColor: 'rgba(255, 206, 86, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Lingkar Kepala (cm)',
+                    data: lingkarKepalaData,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }
+            ]
+        };
+
+        var tumbuhChart = new Chart(ctx, {
+            type: chartType,
+            data: chartData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        $('#btnLine').on('click', function() {
+            tumbuhChart.destroy();
+            tumbuhChart = new Chart(ctx, {
+                type: 'line',
+                data: chartData,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+
+        $('#btnBar').on('click', function() {
+            tumbuhChart.destroy();
+            tumbuhChart = new Chart(ctx, {
+                type: 'bar',
+                data: chartData,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+
+    });
+    </script>
 </body><!--end::Body-->
 
 </html>
