@@ -7,13 +7,19 @@
     }
 
     $pemeriksaan = mysqli_query($conn, "SELECT *, anak.nama as nama_anak, pemeriksaan.foto as foto_anak, dokter.nama as nama_dokter FROM pemeriksaan LEFT JOIN anak ON pemeriksaan.id_anak = anak.id_anak LEFT JOIN dokter ON pemeriksaan.id_dokter = dokter.id_dokter LEFT JOIN user ON pemeriksaan.id_user = user.id_user ORDER BY tanggal_pengamatan DESC");
+    
+    if (isset($_GET['btnPrint'])) {
+        $dari_tanggal = $_GET['dari_tanggal'];
+        $sampai_tanggal = $_GET['sampai_tanggal'];
+        $pemeriksaan = mysqli_query($conn, "SELECT *, anak.nama as nama_anak, pemeriksaan.foto as foto_anak, dokter.nama as nama_dokter FROM pemeriksaan LEFT JOIN anak ON pemeriksaan.id_anak = anak.id_anak LEFT JOIN dokter ON pemeriksaan.id_dokter = dokter.id_dokter LEFT JOIN user ON pemeriksaan.id_user = user.id_user WHERE pemeriksaan.tanggal_pengamatan BETWEEN '$dari_tanggal' AND '$sampai_tanggal' ORDER BY pemeriksaan.tanggal_pengamatan DESC");
+    }
 ?>
 
 <!DOCTYPE html>
 <html lang="en"> <!--begin::Head-->
 
 <head>
-    <title>Pemeriksaan</title>
+    <title>Laporan</title>
     <?php include_once 'include/head.php'; ?>
 </head> <!--end::Head--> <!--begin::Body-->
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary"> <!--begin::App Wrapper-->
@@ -26,13 +32,13 @@
                 <div class="container-fluid"> <!--begin::Row-->
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0"><i class="nav-icon fas fa-fw fa-notes-medical"></i> Pemeriksaan</h3>
+                            <h3 class="mb-0"><i class="nav-icon fas fa-fw fa-history"></i> Laporan</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="index.php">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Pemeriksaan
+                                    Laporan
                                 </li>
                             </ol>
                         </div>
@@ -44,7 +50,26 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive p-2">
-                                <a href="tambah_pemeriksaan.php" class="mb-3 btn btn-primary"><i class="fas fa-fw fa-plus"></i> Tambah Pemeriksaan</a>
+                                <form method="get">
+                                    <div class="row">
+                                        <div class="col-3"> 
+                                            <label for="dari_tanggal" class="form-label">Dari Tanggal</label>
+                                            <input type="date" value="<?= (isset($_GET['dari_tanggal']) ? $_GET['dari_tanggal'] : date('Y-m-01')); ?>" class="form-control" id="dari_tanggal" name="dari_tanggal" required>
+                                        </div>
+                                        <div class="col-3"> 
+                                            <label for="sampai_tanggal" class="form-label">Sampai Tanggal</label>
+                                            <input type="date" value="<?= (isset($_GET['sampai_tanggal']) ? $_GET['sampai_tanggal'] : date('Y-m-d')); ?>" class="form-control" id="sampai_tanggal" name="sampai_tanggal" required>
+                                        </div>
+                                        <div class="col-6 d-flex align-items-end"> 
+                                            <button type="submit" name="btnPrint" class="me-3 btn btn-primary"><i class="fas fa-fw fa-filter"></i> filter</button>
+                                            <?php if (isset($_GET['btnPrint'])): ?>
+                                                <a href="laporan.php" class="me-3 btn btn-danger"><i class="fas fa-fw fa-times"></i> Reset</a>
+                                                <a href="print.php?dari_tanggal=<?= $dari_tanggal; ?>&sampai_tanggal=<?= $sampai_tanggal; ?>" target="_blank" class="btn btn-success"><i class="fas fa-fw fa-print"></i> Print</a>
+                                            <?php endif ?>
+                                        </div>
+                                    </div>
+                                </form>
+                                <hr>
                                 <table class="table table-bordered" id="table_id">
                                     <thead class="table-dark">
                                         <tr>
@@ -57,7 +82,6 @@
                                             <th class="text-center align-middle">Tanggal Pengamatan</th>
                                             <th class="text-center align-middle">Catatan</th>
                                             <th class="text-center align-middle">Operator</th>
-                                            <th class="text-center align-middle">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -65,7 +89,7 @@
                                         <?php foreach ($pemeriksaan as $dp): ?>
                                             <tr>
                                                 <td class="text-center align-middle"><?= $i++; ?>.</td>
-                                                <td class="align-middle"><a href="detail_anak.php?id_anak=<?= $dp['id_anak']; ?>"><?= $dp['nama_anak']; ?></a></td>
+                                                <td class="align-middle"><?= $dp['nama_anak']; ?></td>
                                                 <td class="align-middle"><?= $dp['nama_dokter']; ?></td>
                                                 <td class="align-middle"><?= $dp['berat_badan']; ?></td>
                                                 <td class="align-middle"><?= $dp['tinggi_badan']; ?></td>
@@ -73,10 +97,6 @@
                                                 <td class="align-middle"><?= date('d-m-Y', strtotime($dp['tanggal_pengamatan']));; ?></td>
                                                 <td class="align-middle"><?= $dp['catatan']; ?></td>
                                                 <td class="align-middle"><?= $dp['username']; ?></td>
-                                                <td class="text-center align-middle">
-                                                    <a href="ubah_pemeriksaan.php?id_pemeriksaan=<?= $dp['id_pemeriksaan']; ?>" class="m-1 btn btn-success"><i class="fas fa-fw fa-edit"></i> Ubah</a>
-                                                    <a href="hapus_pemeriksaan.php?id_pemeriksaan=<?= $dp['id_pemeriksaan']; ?>" data-nama="<?= $dp['nama_anak']; ?>" class="m-1 btn btn-danger btn-delete"><i class="fas fa-fw fa-trash"></i> Hapus</a>
-                                                </td>
                                             </tr>
                                         <?php endforeach ?>
                                     </tbody>
