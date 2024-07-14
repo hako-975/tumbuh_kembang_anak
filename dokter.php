@@ -6,6 +6,11 @@
         exit;
     }
 
+    if ($dataUser['jabatan'] == 'petugas') {
+        header("Location: index.php");
+        exit;
+    }
+    
     $dokter = mysqli_query($conn, "SELECT * FROM dokter ORDER BY nama ASC");
 ?>
 
@@ -63,7 +68,7 @@
                                         <?php foreach ($dokter as $dd): ?>
                                             <tr>
                                                 <td class="text-center align-middle"><?= $i++; ?>.</td>
-                                                <td class="text-center align-middle"><img style="height: 100px" src="assets/img/profiles/<?= $dd['foto']; ?>" alt="<?= $dd['foto']; ?>"></td>
+                                                <td class="text-center align-middle"><img style="width: 7.5rem" src="assets/img/profiles/<?= $dd['foto']; ?>" alt="<?= $dd['foto']; ?>"></td>
                                                 <td class="align-middle"><?= $dd['nama']; ?></td>
                                                 <td class="align-middle"><?= $dd['spesialis']; ?></td>
                                                 <td class="align-middle"><?= $dd['no_telepon']; ?></td>

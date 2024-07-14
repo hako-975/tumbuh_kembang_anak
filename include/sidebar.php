@@ -23,16 +23,18 @@
                         <p>Anak</p>
                     </a> 
                 </li>
-                <li class="nav-item"> 
-                    <a href="user.php" class="nav-link <?= ($_SERVER['REQUEST_URI'] == '/tumbuh_kembang_anak/user.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-users"></i>
-                        <p>User</p>
-                    </a> 
-                </li>
-                <li class="nav-item"> 
-                    <a href="dokter.php" class="nav-link <?= ($_SERVER['REQUEST_URI'] == '/tumbuh_kembang_anak/dokter.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-user-md"></i>
-                        <p>Dokter</p>
-                    </a> 
-                </li>
+                <?php if ($dataUser['jabatan'] == 'admin'): ?>
+                    <li class="nav-item"> 
+                        <a href="user.php" class="nav-link <?= ($_SERVER['REQUEST_URI'] == '/tumbuh_kembang_anak/user.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-users"></i>
+                            <p>User</p>
+                        </a> 
+                    </li>
+                    <li class="nav-item"> 
+                        <a href="dokter.php" class="nav-link <?= ($_SERVER['REQUEST_URI'] == '/tumbuh_kembang_anak/dokter.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-user-md"></i>
+                            <p>Dokter</p>
+                        </a> 
+                    </li>
+                <?php endif ?>
                 <li class="nav-item"> 
                     <a href="laporan.php" class="nav-link <?= ($_SERVER['REQUEST_URI'] == '/tumbuh_kembang_anak/laporan.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-file-alt"></i>
                         <p>Laporan</p>

@@ -6,6 +6,11 @@
         exit;
     }
 
+    if ($dataUser['jabatan'] == 'petugas') {
+        header("Location: index.php");
+        exit;
+    }
+
     $user = mysqli_query($conn, "SELECT * FROM user ORDER BY username ASC");
 ?>
 
@@ -62,7 +67,7 @@
                                         <?php foreach ($user as $du): ?>
                                             <tr>
                                                 <td class="text-center align-middle"><?= $i++; ?>.</td>
-                                                <td class="text-center align-middle"><img style="height: 100px" src="assets/img/profiles/<?= $du['foto']; ?>" alt="<?= $du['foto']; ?>"></td>
+                                                <td class="text-center align-middle"><img style="width: 7.5rem" src="assets/img/profiles/<?= $du['foto']; ?>" alt="<?= $du['foto']; ?>"></td>
                                                 <td class="align-middle"><?= $du['username']; ?></td>
                                                 <td class="align-middle"><?= ucwords($du['jabatan']); ?></td>
                                                 <td class="align-middle"><?= $du['nama']; ?></td>

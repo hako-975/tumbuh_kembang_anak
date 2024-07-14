@@ -65,7 +65,7 @@
                                         <?php foreach ($anak as $da): ?>
                                             <tr>
                                                 <td class="text-center align-middle"><?= $i++; ?>.</td>
-                                                <td class="text-center align-middle"><img style="height: 100px" src="assets/img/profiles/<?= $da['foto']; ?>" alt="<?= $da['foto']; ?>"></td>
+                                                <td class="text-center align-middle"><img style="width: 7.5rem" src="assets/img/profiles/<?= $da['foto']; ?>" alt="<?= $da['foto']; ?>"></td>
                                                 <td class="align-middle"><?= $da['nama']; ?></td>
                                                 <td class="align-middle"><?= date('d-m-Y', strtotime($da['tanggal_lahir']));; ?></td>
                                                 <td class="align-middle"><?= $da['jenis_kelamin']; ?></td>

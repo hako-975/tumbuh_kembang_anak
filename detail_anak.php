@@ -16,7 +16,7 @@
 
     $data_pemeriksaan = [];
     while ($row = mysqli_fetch_assoc($chart_pemeriksaan)) {
-        $row['tanggal_pengamatan'] = date('d-m-Y (H:i)', strtotime($row['tanggal_pengamatan']));
+        $row['tanggal_pengamatan'] = date('d-m-Y, H:i', strtotime($row['tanggal_pengamatan']));
         $data_pemeriksaan[] = $row;
     }
 
@@ -30,6 +30,11 @@
     $beratBadanData_json = json_encode($beratBadanData);
     $tinggiBadanData_json = json_encode($tinggiBadanData);
     $lingkarKepalaData_json = json_encode($lingkarKepalaData);
+
+    // Calculate averages
+    $averageBeratBadan = array_sum($beratBadanData) / count($beratBadanData);
+    $averageTinggiBadan = array_sum($tinggiBadanData) / count($tinggiBadanData);
+    $averageLingkarKepala = array_sum($lingkarKepalaData) / count($lingkarKepalaData);
 ?>
 
 <!DOCTYPE html>
@@ -125,6 +130,13 @@
 
                                 <div class="card-body">
                                     <canvas id="tumbuhChart" width="100%"></canvas>
+                                    <hr>
+                                    <div class="mt-3">
+                                        <p class="mb-1"><strong>Rata-rata:</strong></p>
+                                        <p class="mb-1">Berat Badan: <?= number_format($averageBeratBadan, 2); ?> kg</p>
+                                        <p class="mb-1">Tinggi Badan: <?= number_format($averageTinggiBadan, 2); ?> cm</p>
+                                        <p class="mb-1">Lingkar Kepala: <?= number_format($averageLingkarKepala, 2); ?> cm</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

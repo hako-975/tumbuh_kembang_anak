@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 07 Jul 2024 pada 05.01
+-- Waktu pembuatan: 14 Jul 2024 pada 05.25
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 8.2.0
 
@@ -125,7 +125,34 @@ INSERT INTO `log` (`id_log`, `isi_log`, `tgl_log`, `id_user`) VALUES
 (36, 'Pemeriksaan iireng schrodinger berhasil diubah!', '2024-07-07 02:58:38', 1),
 (37, 'Pemeriksaan iireng schrodinger berhasil diubah!', '2024-07-07 02:58:43', 1),
 (38, 'Pemeriksaan iireng schrodinger berhasil diubah!', '2024-07-07 03:00:20', 1),
-(39, 'Anak iireng schrodinger berhasil diubah!', '2024-07-07 03:00:49', 1);
+(39, 'Anak iireng schrodinger berhasil diubah!', '2024-07-07 03:00:49', 1),
+(40, 'User admin berhasil logout!', '2024-07-07 03:01:50', 1),
+(41, 'User alivia123 berhasil login!', '2024-07-07 03:01:55', 20),
+(42, 'User alivia123 berhasil logout!', '2024-07-07 03:01:59', 20),
+(43, 'User admin berhasil login!', '2024-07-08 12:30:23', 1),
+(44, 'Profile berhasil diperbaharui!', '2024-07-08 12:35:00', 1),
+(45, 'Pemeriksaan iireng schrodinger berhasil diubah!', '2024-07-08 12:51:26', 1),
+(46, 'Pemeriksaan iireng schrodinger berhasil ditambahkan!', '2024-07-08 12:53:18', 1),
+(47, 'Pemeriksaan iireng schrodinger berhasil diubah!', '2024-07-08 12:59:51', 1),
+(48, 'Anak iireng schrodingerv iireng schrodinger III berhasil diubah!', '2024-07-08 13:03:52', 1),
+(49, 'Anak iireng schrodinger berhasil diubah!', '2024-07-08 13:04:25', 1),
+(50, 'User admin berhasil logout!', '2024-07-08 13:42:21', 1),
+(51, 'User admin berhasil login!', '2024-07-08 13:45:21', 1),
+(52, 'User admin berhasil login!', '2024-07-12 17:50:51', 1),
+(53, 'User admin berhasil logout!', '2024-07-12 17:51:15', 1),
+(54, 'User admin berhasil login!', '2024-07-12 17:53:49', 1),
+(55, 'User admin berhasil logout!', '2024-07-12 18:49:56', 1),
+(56, 'User admin berhasil login!', '2024-07-14 02:49:04', 1),
+(57, 'Pemeriksaan iireng schrodinger berhasil ditambahkan!', '2024-07-14 02:52:15', 1),
+(58, 'Pemeriksaan iireng schrodinger berhasil diubah!', '2024-07-14 03:00:34', 1),
+(59, 'Pemeriksaan iireng schrodinger berhasil diubah!', '2024-07-14 03:00:59', 1),
+(60, 'User admin berhasil logout!', '2024-07-14 03:15:40', 1),
+(61, 'User alivia123 berhasil login!', '2024-07-14 03:15:47', 20),
+(62, 'User alivia123 berhasil logout!', '2024-07-14 03:16:40', 20),
+(63, 'User admin berhasil login!', '2024-07-14 03:16:43', 1),
+(64, 'User admin berhasil logout!', '2024-07-14 03:16:46', 1),
+(65, 'User alivia123 berhasil login!', '2024-07-14 03:16:50', 20),
+(66, 'User alivia123 berhasil logout!', '2024-07-14 03:24:09', 20);
 
 -- --------------------------------------------------------
 
@@ -151,7 +178,9 @@ CREATE TABLE `pemeriksaan` (
 --
 
 INSERT INTO `pemeriksaan` (`id_pemeriksaan`, `id_anak`, `id_dokter`, `berat_badan`, `tinggi_badan`, `lingkar_kepala`, `tanggal_pengamatan`, `catatan`, `foto`, `id_user`) VALUES
-(3, 3, 3, '21.69', '123.42', '33.69', '2024-07-07 09:48:00', 'tes123', '668a04c43d80d_1720321220_644e0627aff5b.jpeg', 1);
+(3, 3, 3, '21.00', '123.00', '40.00', '2024-07-07 09:48:00', 'sehat', '668a04c43d80d_1720321220_644e0627aff5b.jpeg', 1),
+(4, 3, 3, '40.00', '140.00', '40.00', '2024-07-08 19:52:00', 'sehat', '668be2c7f0cd0_1720443591_61b19e6fc24b9.jpg', 1),
+(5, 3, 3, '45.00', '141.00', '40.00', '2024-07-14 09:51:00', '', 'default.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -174,7 +203,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `jabatan`, `nama`, `foto`, `dibuat_pada`) VALUES
-(1, 'admin', '$2y$10$PDN4Md5jfPRsvJ5DJyJ.r.Bcf6mMSG.g5BBZaivJEd6padJYBerky', 'admin', 'Administrator', '6688a7d63d645_1720231894_avatar5.png', '2024-07-04 08:52:18'),
+(1, 'admin', '$2y$10$PDN4Md5jfPRsvJ5DJyJ.r.Bcf6mMSG.g5BBZaivJEd6padJYBerky', 'admin', 'Administrator', '668bdcf48892c_1720442100_avatar5.png', '2024-07-04 08:52:18'),
 (20, 'alivia123', '$2y$10$PszuD6VZ7N.lKSP7d3IFCudtAwrkgld5D2QOmP0icXoPP007LOvPG', 'petugas', 'Alivia Sabrina', '6688a81f8886c_1720231967_avatar3.png', '2024-07-06 02:12:47');
 
 --
@@ -205,9 +234,9 @@ ALTER TABLE `log`
 --
 ALTER TABLE `pemeriksaan`
   ADD PRIMARY KEY (`id_pemeriksaan`),
-  ADD KEY `id_anak` (`id_anak`),
   ADD KEY `id_dokter` (`id_dokter`),
-  ADD KEY `id_user` (`id_user`);
+  ADD KEY `id_user` (`id_user`),
+  ADD KEY `pemeriksaan_ibfk_1` (`id_anak`);
 
 --
 -- Indeks untuk tabel `user`
@@ -235,13 +264,13 @@ ALTER TABLE `dokter`
 -- AUTO_INCREMENT untuk tabel `log`
 --
 ALTER TABLE `log`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT untuk tabel `pemeriksaan`
 --
 ALTER TABLE `pemeriksaan`
-  MODIFY `id_pemeriksaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pemeriksaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
@@ -257,15 +286,15 @@ ALTER TABLE `user`
 -- Ketidakleluasaan untuk tabel `log`
 --
 ALTER TABLE `log`
-  ADD CONSTRAINT `log_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `log_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `pemeriksaan`
 --
 ALTER TABLE `pemeriksaan`
-  ADD CONSTRAINT `pemeriksaan_ibfk_1` FOREIGN KEY (`id_anak`) REFERENCES `anak` (`id_anak`),
-  ADD CONSTRAINT `pemeriksaan_ibfk_2` FOREIGN KEY (`id_dokter`) REFERENCES `dokter` (`id_dokter`),
-  ADD CONSTRAINT `pemeriksaan_ibfk_3` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
+  ADD CONSTRAINT `pemeriksaan_ibfk_1` FOREIGN KEY (`id_anak`) REFERENCES `anak` (`id_anak`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pemeriksaan_ibfk_2` FOREIGN KEY (`id_dokter`) REFERENCES `dokter` (`id_dokter`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pemeriksaan_ibfk_3` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

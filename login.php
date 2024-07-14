@@ -94,10 +94,10 @@
                         <div class="input-group-text"> <span class="fas fa-fw fa-lock"></span> </div>
                     </div> <!--begin::Row-->
                     <div class="row mt-3">
-                        <div class="col-6 d-inline-flex align-items-center">
+                        <!-- <div class="col-6 d-inline-flex align-items-center">
                             <a href="forgot-password.html">Lupa Password</a>
-                        </div> <!-- /.col -->
-                        <div class="col-6 text-end">
+                        </div> --> <!-- /.col -->
+                        <div class="col text-end">
                             <button type="submit" name="btnLogin" class="btn btn-primary">Login <span class="fas fa-fw fa-sign-in-alt"></span></button>
                         </div> <!-- /.col -->
                     </div> <!--end::Row-->

@@ -8,6 +8,12 @@
 	    header("Location: login.php");
 	    exit;
 	}
+
+	if ($dataUser['jabatan'] == 'petugas') {
+        header("Location: index.php");
+        exit;
+    }
+        
 	
 	$id_dokter = $_GET['id_dokter'];
 

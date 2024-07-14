@@ -6,6 +6,11 @@
         exit;
     }
 
+    if ($dataUser['jabatan'] == 'petugas') {
+        header("Location: index.php");
+        exit;
+    }
+
     $id_user = $_GET['id_user'];
     $data_user = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM user WHERE id_user = '$id_user'"));
 
