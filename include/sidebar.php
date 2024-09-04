@@ -14,6 +14,11 @@
                     </a>
                 </li>
                 <li class="nav-item"> 
+                    <a href="antrian.php" class="nav-link <?= ($_SERVER['REQUEST_URI'] == '/tumbuh_kembang_anak/antrian.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-user-friends"></i>
+                        <p>Antrian</p>
+                    </a> 
+                </li>
+                <li class="nav-item"> 
                     <a href="pemeriksaan.php" class="nav-link <?= ($_SERVER['REQUEST_URI'] == '/tumbuh_kembang_anak/pemeriksaan.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-notes-medical"></i>
                         <p>Pemeriksaan</p>
                     </a> 

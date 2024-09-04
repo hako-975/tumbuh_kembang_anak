@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 14 Jul 2024 pada 05.25
+-- Waktu pembuatan: 04 Sep 2024 pada 17.49
 -- Versi server: 10.4.27-MariaDB
--- Versi PHP: 8.2.0
+-- Versi PHP: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -45,6 +45,28 @@ CREATE TABLE `anak` (
 
 INSERT INTO `anak` (`id_anak`, `nama`, `tanggal_lahir`, `jenis_kelamin`, `nama_ibu_kandung`, `no_telepon_orang_tua`, `alamat_orang_tua`, `foto`, `dibuat_pada`) VALUES
 (3, 'iireng schrodinger', '2024-07-07', 'perempuan', 'igi', '0', 'rumah', '668a04e15cb39_1720321249_jbc-TK_d8kni3OI-unsplash.jpg', '2024-07-07 02:09:31');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `antrian`
+--
+
+CREATE TABLE `antrian` (
+  `id_antrian` int(11) NOT NULL,
+  `waktu_antrian` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` enum('Menunggu','Diproses','Selesai','Dilewati') DEFAULT 'Menunggu'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `antrian`
+--
+
+INSERT INTO `antrian` (`id_antrian`, `waktu_antrian`, `status`) VALUES
+(4, '2024-09-04 15:41:46', 'Selesai'),
+(5, '2024-09-04 15:41:47', 'Selesai'),
+(6, '2024-09-04 15:42:06', 'Menunggu'),
+(7, '2024-09-04 15:42:48', 'Menunggu');
 
 -- --------------------------------------------------------
 
@@ -152,7 +174,13 @@ INSERT INTO `log` (`id_log`, `isi_log`, `tgl_log`, `id_user`) VALUES
 (63, 'User admin berhasil login!', '2024-07-14 03:16:43', 1),
 (64, 'User admin berhasil logout!', '2024-07-14 03:16:46', 1),
 (65, 'User alivia123 berhasil login!', '2024-07-14 03:16:50', 20),
-(66, 'User alivia123 berhasil logout!', '2024-07-14 03:24:09', 20);
+(66, 'User alivia123 berhasil logout!', '2024-07-14 03:24:09', 20),
+(67, 'User admin berhasil login!', '2024-09-04 14:44:57', 1),
+(68, 'Antrian 1 berhasil dihapus!', '2024-09-04 15:15:59', 1),
+(69, 'Antrian 1 berhasil dihapus!', '2024-09-04 15:16:08', 1),
+(70, 'User admin berhasil login!', '2024-09-04 15:23:21', 1),
+(71, 'Antrian 2 berhasil dihapus!', '2024-09-04 15:40:15', 1),
+(72, 'Antrian 3 berhasil dihapus!', '2024-09-04 15:40:19', 1);
 
 -- --------------------------------------------------------
 
@@ -217,6 +245,12 @@ ALTER TABLE `anak`
   ADD PRIMARY KEY (`id_anak`);
 
 --
+-- Indeks untuk tabel `antrian`
+--
+ALTER TABLE `antrian`
+  ADD PRIMARY KEY (`id_antrian`);
+
+--
 -- Indeks untuk tabel `dokter`
 --
 ALTER TABLE `dokter`
@@ -255,6 +289,12 @@ ALTER TABLE `anak`
   MODIFY `id_anak` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT untuk tabel `antrian`
+--
+ALTER TABLE `antrian`
+  MODIFY `id_antrian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT untuk tabel `dokter`
 --
 ALTER TABLE `dokter`
@@ -264,7 +304,7 @@ ALTER TABLE `dokter`
 -- AUTO_INCREMENT untuk tabel `log`
 --
 ALTER TABLE `log`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT untuk tabel `pemeriksaan`

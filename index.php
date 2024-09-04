@@ -6,6 +6,7 @@
         exit;
     }
 
+    $jml_antrian = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM antrian"));
     $jml_pemeriksaan = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM pemeriksaan"));
     $jml_anak = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM anak"));
     $jml_user = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM user"));
@@ -46,33 +47,48 @@
                 <div class="container-fluid"> <!-- Info boxes -->
                     <div class="row">
                         <div class="col-12 col-sm-6 col-md-3">
-                            <div class="info-box"> <span class="info-box-icon text-bg-success shadow-sm"> <i class="fas fa-fw fa-notes-medical"></i> </span>
-                                <div class="info-box-content"> <span class="info-box-text">Jumlah Pemeriksaan</span> 
-                                    <span class="info-box-number">
-                                        <?= $jml_anak; ?>
-                                    </span> </div>
-                            </div> <!-- /.info-box -->
+                            <a href="pemeriksaan.php" class="nav-link">
+                                <div class="info-box"> <span class="info-box-icon text-bg-success shadow-sm"> <i class="fas fa-fw fa-notes-medical"></i> </span>
+                                    <div class="info-box-content"> <span class="info-box-text">Jumlah Pemeriksaan</span> 
+                                        <span class="info-box-number">
+                                            <?= $jml_pemeriksaan; ?>
+                                        </span> </div>
+                                </div> <!-- /.info-box -->
+                            </a>
                         </div> <!-- /.col -->
                         <div class="col-12 col-sm-6 col-md-3">
-                            <div class="info-box"> <span class="info-box-icon text-bg-primary shadow-sm"> <i class="fas fa-fw fa-baby"></i> </span>
-                                <div class="info-box-content"> <span class="info-box-text">Jumlah Anak</span> 
-                                    <span class="info-box-number">
-                                        <?= $jml_anak; ?>
-                                    </span>
+                            <a href="anak.php" class="nav-link">
+                                <div class="info-box"> <span class="info-box-icon text-bg-primary shadow-sm"> <i class="fas fa-fw fa-baby"></i> </span>
+                                    <div class="info-box-content"> <span class="info-box-text">Jumlah Anak</span> 
+                                        <span class="info-box-number">
+                                            <?= $jml_anak; ?>
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div> 
                         <div class="col-12 col-sm-6 col-md-3">
-                            <div class="info-box"> <span class="info-box-icon text-bg-warning shadow-sm"> <i class="fas fa-fw fa-users text-white"></i> </span>
-                                <div class="info-box-content"> <span class="info-box-text">Jumlah User</span>
-                                    <span class="info-box-number"><?= $jml_user; ?></span>
-                                </div> <!-- /.info-box-content -->
-                            </div> <!-- /.info-box -->
+                            <a href="user.php" class="nav-link">
+                                <div class="info-box"> <span class="info-box-icon text-bg-warning shadow-sm"> <i class="fas fa-fw fa-users text-white"></i> </span>
+                                    <div class="info-box-content"> <span class="info-box-text">Jumlah User</span>
+                                        <span class="info-box-number"><?= $jml_user; ?></span>
+                                    </div> <!-- /.info-box-content -->
+                                </div> <!-- /.info-box -->
+                            </a>
                         </div> <!-- /.col -->
                         <div class="col-12 col-sm-6 col-md-3">
-                            <div class="info-box"> <span class="info-box-icon text-bg-danger shadow-sm"> <i class="fas fa-fw fa-user-md"></i> </span>
-                                <div class="info-box-content"> <span class="info-box-text">Jumlah Dokter</span> <span class="info-box-number"><?= $jml_dokter; ?></span> </div> <!-- /.info-box-content -->
-                            </div> <!-- /.info-box -->
+                            <a href="dokter.php" class="nav-link">
+                                <div class="info-box"> <span class="info-box-icon text-bg-danger shadow-sm"> <i class="fas fa-fw fa-user-md"></i> </span>
+                                    <div class="info-box-content"> <span class="info-box-text">Jumlah Dokter</span> <span class="info-box-number"><?= $jml_dokter; ?></span> </div> <!-- /.info-box-content -->
+                                </div> <!-- /.info-box -->
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-3">
+                            <a href="antrian.php" class="nav-link">
+                                <div class="info-box"> <span class="info-box-icon text-bg-secondary shadow-sm"> <i class="fas fa-fw fa-user-friends"></i> </span>
+                                    <div class="info-box-content"> <span class="info-box-text">Jumlah Antrian</span> <span class="info-box-number"><?= $jml_antrian; ?></span> </div> <!-- /.info-box-content -->
+                                </div> <!-- /.info-box -->
+                            </a>
                         </div>
                     </div> <!-- /.row --> <!--begin::Row-->
                 </div> <!--end::Container-->
